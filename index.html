@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MemeVerse Projects</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+            padding: 50px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2em;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-card h3 {
+            font-size: 1.5em;
+            color: #ff6b6b;
+            margin-bottom: 10px;
+        }
+
+        .project-card p {
+            font-size: 1em;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .project-card span {
+            font-weight: bold;
+            color: #4ecdc4;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #333;
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            header p {
+                font-size: 1em;
+            }
+
+            .project-card h3 {
+                font-size: 1.3em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to MemeVerse</h1>
+        <p>Explore our innovative projects revolutionizing the meme ecosystem!</p>
+    </header>
+
+    <div class="container">
+        <div class="project-grid" id="project-grid">
+            <!-- Projects will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 MemeVerse. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const projects = [
+            { abbr: "NLNS", name: "Not Lug Not Spam", desc: "Meme Checker" },
+            { abbr: "SMTW", name: "Show Me The Way", desc: "Meme Generator" },
+            { abbr: "WAYG", name: "Where Are You Going", desc: "Meme Investment Statistics" },
+            { abbr: "WDYW", name: "What Do You Want", desc: "Meme Marketing Agent" },
+            { abbr: "HFHWC", name: "How Far Have We Come", desc: "Meme Influence Checker" },
+            { abbr: "EIMM", name: "Everything Is My Mind", desc: "Meme Health Checker" },
+            { abbr: "WDYG", name: "What Did You Get", desc: "Meme Life Cycle" },
+            { abbr: "WHTGT", name: "We Have To Go Together", desc: "Meme Market Checker" },
+            { abbr: "HOHM", name: "Helping Others Helps Me", desc: "Meme Donation System" },
+            { abbr: "WATW", name: "We Are The World", desc: "Meme Culture Analyzer" }
+        ];
+
+        const projectGrid = document.getElementById("project-grid");
+
+        projects.forEach(project => {
+            const card = document.createElement("div");
+            card.className = "project-card";
+            card.innerHTML = `
+                <h3>${project.abbr}</h3>
+                <p><span>${project.name}</span></p>
+                <p>${project.desc}</p>
+            `;
+            projectGrid.appendChild(card);
+        });
+    </script>
+</body>
+</html>
