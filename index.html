@@ -1,8 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>MemeVerse Projects</title>
     <style>
         * {
@@ -51,25 +53,39 @@
             padding: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s;
+            display: flex;
+            align-items: center;
         }
 
         .project-card:hover {
             transform: translateY(-5px);
         }
 
-        .project-card h3 {
+        .project-card img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 15px;
+        }
+
+        .project-content {
+            flex: 1;
+        }
+
+        .project-content h3 {
             font-size: 1.5em;
             color: #ff6b6b;
             margin-bottom: 10px;
         }
 
-        .project-card p {
+        .project-content p {
             font-size: 1em;
             color: #555;
             margin-bottom: 15px;
         }
 
-        .project-card span {
+        .project-content span {
             font-weight: bold;
             color: #4ecdc4;
         }
@@ -93,7 +109,17 @@
                 font-size: 1em;
             }
 
-            .project-card h3 {
+            .project-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .project-card img {
+                margin-bottom: 10px;
+                margin-right: 0;
+            }
+
+            .project-content h3 {
                 font-size: 1.3em;
             }
         }
@@ -112,7 +138,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2025 MemeVerse. All rights reserved.</p>
+        <p>© 2025 MemeVerse. All rights reserved.</p>
     </footer>
 
     <script>
@@ -134,10 +160,15 @@
         projects.forEach(project => {
             const card = document.createElement("div");
             card.className = "project-card";
+            // Lorem Picsum에서 랜덤 이미지 로드 (80x80 크기)
+            const randomImage = `https://picsum.photos/80/80?random=${Math.floor(Math.random() * 1000)}`;
             card.innerHTML = `
-                <h3>${project.abbr}</h3>
-                <p><span>${project.name}</span></p>
-                <p>${project.desc}</p>
+                <img src="${randomImage}" alt="Random Image for ${project.abbr}">
+                <div class="project-content">
+                    <h3>${project.abbr}</h3>
+                    <p><span>${project.name}</span></p>
+                    <p>${project.desc}</p>
+                </div>
             `;
             projectGrid.appendChild(card);
         });
