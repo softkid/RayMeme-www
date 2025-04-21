@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -53,7 +52,9 @@
             padding: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s;
-            display: flex;
+            display: grid;
+            grid-template-columns: 100px 1fr; /* 가로 2단: 이미지(100px) + 텍스트 */
+            gap: 15px;
             align-items: center;
         }
 
@@ -61,16 +62,11 @@
             transform: translateY(-5px);
         }
 
-        .project-card img {
-            width: 80px;
-            height: 80px;
+        .project-image img {
+            width: 100px;
+            height: 100px;
             object-fit: cover;
             border-radius: 8px;
-            margin-right: 15px;
-        }
-
-        .project-content {
-            flex: 1;
         }
 
         .project-content h3 {
@@ -82,12 +78,26 @@
         .project-content p {
             font-size: 1em;
             color: #555;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         .project-content span {
             font-weight: bold;
             color: #4ecdc4;
+        }
+
+        .progress-bar {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .progress {
+            height: 20px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+            transition: width 0.5s ease-in-out;
         }
 
         footer {
@@ -110,13 +120,14 @@
             }
 
             .project-card {
-                flex-direction: column;
+                grid-template-columns: 1fr; /* 모바일에서는 단일 컬럼 */
                 align-items: flex-start;
             }
 
-            .project-card img {
-                margin-bottom: 10px;
-                margin-right: 0;
+            .project-image img {
+                width: 100%;
+                height: auto;
+                max-height: 150px;
             }
 
             .project-content h3 {
@@ -143,16 +154,16 @@
 
     <script>
         const projects = [
-            { abbr: "NLNS", name: "Not Lug Not Spam", desc: "Meme Checker" },
-            { abbr: "SMTW", name: "Show Me The Way", desc: "Meme Generator" },
-            { abbr: "WAYG", name: "Where Are You Going", desc: "Meme Investment Statistics" },
-            { abbr: "WDYW", name: "What Do You Want", desc: "Meme Marketing Agent" },
-            { abbr: "HFHWC", name: "How Far Have We Come", desc: "Meme Influence Checker" },
-            { abbr: "EIMM", name: "Everything Is My Mind", desc: "Meme Health Checker" },
-            { abbr: "WDYG", name: "What Did You Get", desc: "Meme Life Cycle" },
-            { abbr: "WHTGT", name: "We Have To Go Together", desc: "Meme Market Checker" },
-            { abbr: "HOHM", name: "Helping Others Helps Me", desc: "Meme Donation System" },
-            { abbr: "WATW", name: "We Are The World", desc: "Meme Culture Analyzer" }
+            { abbr: "NLNS", name: "Not Lug Not Spam", desc: "Meme Checker", progress: 80 },
+            { abbr: "SMTW", name: "Show Me The Way", desc: "Meme Generator", progress: 65 },
+            { abbr: "WAYG", name: "Where Are You Going", desc: "Meme Investment Statistics", progress: 45 },
+            { abbr: "WDYW", name: "What Do You Want", desc: "Meme Marketing Agent", progress: 90 },
+            { abbr: "HFHWC", name: "How Far Have We Come", desc: "Meme Influence Checker", progress: 30 },
+            { abbr: "EIMM", name: "Everything Is My Mind", desc: "Meme Health Checker", progress: 75 },
+            { abbr: "WDYG", name: "What Did You Get", desc: "Meme Life Cycle", progress: 50 },
+            { abbr: "WHTGT", name: "We Have To Go Together", desc: "Meme Market Checker", progress: 85 },
+            { abbr: "HOHM", name: "Helping Others Helps Me", desc: "Meme Donation System", progress: 20 },
+            { abbr: "WATW", name: "We Are The World", desc: "Meme Culture Analyzer", progress: 95 }
         ];
 
         const projectGrid = document.getElementById("project-grid");
@@ -160,14 +171,19 @@
         projects.forEach(project => {
             const card = document.createElement("div");
             card.className = "project-card";
-            // Lorem Picsum에서 랜덤 이미지 로드 (80x80 크기)
-            const randomImage = `https://picsum.photos/80/80?random=${Math.floor(Math.random() * 1000)}`;
+            const randomImage = `https://picsum.photos/100/100?random=${Math.floor(Math.random() * 1000)}`;
             card.innerHTML = `
-                <img src="${randomImage}" alt="Random Image for ${project.abbr}">
+                <div class="project-image">
+                    <img src="${randomImage}" alt="Random Image for ${project.abbr}">
+                </div>
                 <div class="project-content">
                     <h3>${project.abbr}</h3>
                     <p><span>${project.name}</span></p>
                     <p>${project.desc}</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: ${project.progress}%"></div>
+                    </div>
+                    <p>Progress: ${project.progress}%</p>
                 </div>
             `;
             projectGrid.appendChild(card);
