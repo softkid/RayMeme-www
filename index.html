@@ -1,812 +1,155 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <!-- SEO 메타 태그 (기본: HOME) -->
-    <meta name="description" content="MemeVerse: Explore innovative blockchain-based meme projects revolutionizing digital culture in Africa and Asia.">
-    <meta name="keywords" content="MemeVerse, meme, blockchain, digital culture, Solana, crypto, Africa, Asia">
-    <meta name="author" content="MemeVerse Team">
-    <!-- Open Graph -->
-    <meta property="og:title" content="MemeVerse - Revolutionizing Meme Ecosystem">
-    <meta property="og:description" content="Discover MemeVerse's blockchain projects transforming meme culture globally.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yourdomain.com">
-    <meta property="og:image" content="https://source.unsplash.com/200/200?meme">
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="MemeVerse - Revolutionizing Meme Ecosystem">
-    <meta name="twitter:description" content="Discover MemeVerse's blockchain projects transforming meme culture globally.">
-    <meta name="twitter:image" content="https://source.unsplash.com/200/200?meme">
-    <meta name="twitter:site" content="@goodprogram">
-    <title>MemeVerse</title>
-    <!-- 동적 JSON-LD 스키마 -->
-    <script id="schema-script" type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": "MemeVerse Projects",
-        "description": "MemeVerse offers innovative blockchain-based meme projects to revolutionize digital culture.",
-        "url": "https://yourdomain.com",
-        "publisher": {
-            "@type": "Organization",
-            "name": "MemeVerse",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://source.unsplash.com/200/200?meme"
-            }
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CoffeeCoin</title>
+  <style>
+    :root {
+      --brown: #5c4033;
+      --dark-brown: #4b2e20;
+      --light-brown: #fef3c7;
+      --amber: #fbbf24;
     }
-    </script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
-        }
-
-        body {
-            background-color: #f0f2f5;
-            color: #333;
-        }
-
-        header {
-            background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
-            padding: 20px;
-            text-align: center;
-            color: white;
-            position: relative;
-        }
-
-        header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-
-        header p {
-            font-size: 1.2em;
-            margin-bottom: 20px;
-        }
-
-        .header-message {
-            font-size: 0.9em;
-            max-width: 600px;
-            margin: 0 auto 20px;
-            line-height: 1.5;
-        }
-
-        .solana-address {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .solana-address span {
-            font-size: 1em;
-            font-family: monospace;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 5px 10px;
-            border-radius: 5px;
-        }
-
-        .copy-button {
-            background: #fff;
-            color: #ff6b6b;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.9em;
-            transition: background 0.3s;
-        }
-
-        .copy-button:hover {
-            background: #ff6b6b;
-            color: white;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 8px;
-            font-size: 1em;
-            z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-        }
-
-        .modal.show {
-            display: block;
-            opacity: 1;
-        }
-
-        /* 메뉴 버튼 및 네비게이션 스타일 */
-        .menu-button {
-            display: none;
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: none;
-            font-size: 1.5em;
-            color: white;
-            cursor: pointer;
-            z-index: 1100;
-        }
-
-        .nav-menu {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .nav-menu a {
-            color: white;
-            text-decoration: none;
-            font-size: 1em;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-
-        .nav-menu a:hover {
-            color: #ff6b6b;
-        }
-
-        .nav-menu a.active {
-            color: #ff6b6b;
-            border-bottom: 2px solid #ff6b6b;
-        }
-
-        main {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        section {
-            display: none;
-        }
-
-        section.active {
-            display: block;
-        }
-
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .project-card {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-            display: grid;
-            grid-template-columns: 100px 1fr;
-            gap: 15px;
-            align-items: center;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .project-image img {
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 8px;
-            image-rendering: -webkit-optimize-contrast;
-        }
-
-        .project-content h2 {
-            font-size: 1.5em;
-            color: #ff6b6b;
-            margin-bottom: 10px;
-        }
-
-        .project-content a {
-            text-decoration: none;
-            color: #4ecdc4;
-            font-weight: bold;
-        }
-
-        .project-content a:hover {
-            color: #ff6b6b;
-            text-decoration: underline;
-        }
-
-        .project-content p {
-            font-size: 1em;
-            color: #555;
-            margin-bottom: 10px;
-        }
-
-        .progress-bar {
-            width: 100%;
-            background-color: #e0e0e0;
-            border-radius: 5px;
-            overflow: hidden;
-            margin-top: 10px;
-        }
-
-        .progress {
-            height: 20px;
-            background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
-            transition: width 0.5s ease-in-out;
-        }
-
-        /* SYSTEM 페이지 스타일 */
-        .system-content {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .system-content h2 {
-            font-size: 2em;
-            color: #ff6b6b;
-            margin-bottom: 20px;
-        }
-
-        .system-content p {
-            font-size: 1em;
-            color: #555;
-            line-height: 1.6;
-            margin-bottom: 15px;
-        }
-
-        /* CULTURE 페이지 스타일 */
-        .culture-content {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .culture-content h2 {
-            font-size: 2em;
-            color: #ff6b6b;
-            margin-bottom: 20px;
-        }
-
-        .culture-content ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .culture-content li {
-            font-size: 1em;
-            color: #555;
-            margin-bottom: 15px;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .culture-content li::before {
-            content: "✔";
-            color: #4ecdc4;
-            position: absolute;
-            left: 0;
-        }
-
-        /* TEAM 페이지 스타일 */
-        .team-content {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .team-content h2 {
-            font-size: 2em;
-            color: #ff6b6b;
-            margin-bottom: 20px;
-        }
-
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .team-member {
-            text-align: center;
-        }
-
-        .team-member img {
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 50%;
-            margin-bottom: 10px;
-        }
-
-        .team-member h3 {
-            font-size: 1.2em;
-            color: #4ecdc4;
-            margin-bottom: 5px;
-        }
-
-        .team-member p {
-            font-size: 0.9em;
-            color: #555;
-        }
-
-        .apply-form {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .apply-form h3 {
-            font-size: 1.5em;
-            color: #ff6b6b;
-            margin-bottom: 15px;
-        }
-
-        .apply-form input {
-            padding: 10px;
-            width: 100%;
-            max-width: 300px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            font-size: 1em;
-        }
-
-        .apply-form button {
-            background: #ff6b6b;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            transition: background 0.3s;
-        }
-
-        .apply-form button:hover {
-            background: #4ecdc4;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: #333;
-            color: white;
-            position: relative;
-            bottom: 0;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-        }
-
-        footer p {
-            margin: 0;
-        }
-
-        .twitter-icon {
-            display: inline-block;
-            transition: fill 0.3s;
-        }
-
-        .twitter-icon:hover {
-            fill: #ff6b6b;
-        }
-
-        .twitter-icon svg {
-            width: 24px;
-            height: 24px;
-            fill: white;
-        }
-
-        @media (max-width: 600px) {
-            header {
-                padding: 20px;
-            }
-
-            header h1 {
-                font-size: 2em;
-            }
-
-            header p {
-                font-size: 1em;
-            }
-
-            .header-message {
-                font-size: 0.8em;
-                padding: 0 10px;
-            }
-
-            .solana-address {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .solana-address span {
-                font-size: 0.9em;
-                word-break: break-all;
-                text-align: center;
-            }
-
-            .menu-button {
-                display: block;
-            }
-
-            .nav-menu {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, 0.9);
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                gap: 30px;
-                z-index: 1000;
-                transition: transform 0.3s ease-in-out;
-                transform: translateX(-100%);
-            }
-
-            .nav-menu.active {
-                display: flex;
-                transform: translateX(0);
-            }
-
-            .nav-menu a {
-                font-size: 1.5em;
-                color: white;
-            }
-
-            .project-card {
-                grid-template-columns: 1fr;
-                align-items: flex-start;
-            }
-
-            .project-image img {
-                width: 100%;
-                height: auto;
-                max-height: 150px;
-            }
-
-            .project-content h2 {
-                font-size: 1.3em;
-            }
-
-            footer {
-                flex-direction: column;
-                gap: 10px;
-            }
-        }
-    </style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, var(--light-brown), #fcd34d);
+      color: var(--brown);
+      text-align: center;
+      padding: 1.5rem;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      width: 100px;
+      max-width: 30%;
+      height: auto;
+      margin: 0 auto 1rem;
+      animation: fadeIn 1s ease-out;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      animation: fadeInDown 0.6s ease-out;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.6;
+      animation: fadeIn 1s ease-out;
+      margin: 0.5rem 0;
+    }
+
+    .card-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    @media (min-width: 600px) {
+      .card-grid {
+        flex-direction: row;
+      }
+    }
+
+    .card {
+      background: white;
+      border: 2px solid var(--amber);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      flex: 1;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    .card h2 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .button {
+      display: inline-block;
+      background-color: var(--dark-brown);
+      color: white;
+      padding: 0.7rem 1.2rem;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      font-size: 1rem;
+      margin-top: 1rem;
+    }
+
+    .button:hover {
+      background-color: #6b3f27;
+    }
+
+    .footer {
+      margin-top: 3rem;
+      font-style: italic;
+      font-size: 1rem;
+    }
+
+    .sparkle {
+      font-size: 2rem;
+      color: var(--amber);
+      animation: pulse 1.5s infinite;
+      margin-top: 1rem;
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <button class="menu-button" onclick="toggleMenu()" aria-label="Toggle Menu">☰</button>
-        <nav class="nav-menu" id="navMenu" aria-label="Main Navigation">
-            <a href="/" aria-label="MemeVerse Home" data-page="home">HOME</a>
-            <a href="/system" aria-label="MemeVerse System" data-page="system">SYSTEM</a>
-            <a href="/culture" aria-label="MemeVerse Culture" data-page="culture">CULTURE</a>
-            <a href="/team" aria-label="MemeVerse Team" data-page="team">TEAM</a>
-        </nav>
-        <h1>MemeVerse</h1>
-        <p>Explore our innovative projects revolutionizing the meme ecosystem!</p>
-        <p class="header-message">
-            This project will help many people in Africa and Asia achieve their dreams. 
-            I am very excited for the opportunity to participate in your sharing. 
-            I pray that your life will be happy.
-        </p>
-        <div class="solana-address">
-            <span>7f441uouCnNhQCgNfZ5FU2Baj1VLaqFBLDNgoT7sd3w</span>
-            <button class="copy-button" onclick="copyAddress()" aria-label="Copy Solana Address">Copy</button>
-        </div>
-    </header>
+  <div class="container">
+    <img src="logo.png" alt="CoffeeCoin Logo" class="logo" />
+    <h1>CoffeeCoin</h1>
+    <p>
+      Just think for a second how many people drink coffee, and how many different types there are—
+      from iced lattes to espresso martinis. The possibilities are endless, the mindshare massive.
+      The potential… staggering. We’re just getting started “brewing” as we like to say.
+    </p>
 
-    <div class="modal" id="copyModal">
-        Solana address copied to clipboard!
+    <div class="card-grid">
+      <div class="card">
+        <h2>Token Address</h2>
+        <p style="word-wrap: break-word;">8s5X3yLEx2rx8BxGT5uSwR9Z5FP5T64VLr4kkPStpump</p>
+      </div>
+      <div class="card">
+        <h2>Join the Buzz</h2>
+        <a href="https://x.com/itscoffeecoin" target="_blank" class="button">Follow us on X</a>
+      </div>
     </div>
 
-    <main aria-label="MemeVerse Content">
-        <!-- HOME 페이지 -->
-        <section id="home" class="container" aria-label="Project List">
-            <div class="project-grid" id="project-grid">
-                <!-- Projects will be dynamically inserted here -->
-            </div>
-        </section>
-
-        <!-- SYSTEM 페이지 -->
-        <section id="system" class="container" aria-label="System Description">
-            <div class="system-content">
-                <h2>Our Meme Management System</h2>
-                <p>MemeVerse's Meme Management System is designed to empower users by providing seamless tools to create, share, and monetize memes on the blockchain. Built on Solana, our system ensures fast, secure, and low-cost transactions, making it accessible to creators worldwide.</p>
-                <p>Users can access our intuitive platform to:</p>
-                <ul>
-                    <li><strong>Create Memes</strong>: Use our built-in editor to design memes with trending templates.</li>
-                    <li><strong>Share Globally</strong>: Distribute memes across social platforms with one click.</li>
-                    <li><strong>Earn Rewards</strong>: Monetize memes through NFT marketplaces integrated with Solana.</li>
-                    <li><strong>Track Impact</strong>: Analyze meme performance with real-time analytics.</li>
-                </ul>
-                <p>Our system is user-friendly, supporting creators in Africa, Asia, and beyond to join the meme economy and build communities around their content.</p>
-            </div>
-        </section>
-
-        <!-- CULTURE 페이지 -->
-        <section id="culture" class="container" aria-label="Culture Development">
-            <div class="culture-content">
-                <h2>Advancing Meme Culture</h2>
-                <p>At MemeVerse, we believe memes are more than just entertainment—they're a global language driving digital culture. Here are five ways we aim to develop and elevate meme culture:</p>
-                <ul>
-                    <li><strong>Promote Inclusivity</strong>: Create platforms where diverse voices from Africa, Asia, and beyond can share their unique meme perspectives.</li>
-                    <li><strong>Support Creators</strong>: Provide tools and financial incentives for meme creators to thrive in the blockchain ecosystem.</li>
-                    <li><strong>Educate Communities</strong>: Offer resources to teach the value of memes as cultural artifacts and economic assets.</li>
-                    <li><strong>Foster Collaboration</strong>: Build global communities where meme enthusiasts can co-create and innovate.</li>
-                    <li><strong>Preserve Heritage</strong>: Archive iconic memes as NFTs to ensure their cultural significance endures.</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- TEAM 페이지 -->
-        <section id="team" class="container" aria-label="Team and Recruitment">
-            <div class="team-content">
-                <h2>Meet Our Team</h2>
-                <div class="team-grid">
-                    <div class="team-member">
-                        <img src="https://source.unsplash.com/200/200?cartoon&sig=1" alt="Alex, MemeVerse Founder" loading="lazy">
-                        <h3>Alex</h3>
-                        <p>Founder & Visionary. Alex drives MemeVerse's mission to revolutionize meme culture with blockchain technology.</p>
-                    </div>
-                    <div class="team-member">
-                        <img src="https://source.unsplash.com/200/200?cartoon&sig=2" alt="Sam, MemeVerse Developer" loading="lazy">
-                        <h3>Sam</h3>
-                        <p>Lead Developer. Sam builds our Solana-based platform, ensuring seamless user experiences.</p>
-                    </div>
-                    <div class="team-member">
-                        <img src="https://source.unsplash.com/200/200?cartoon&sig=3" alt="Taylor, MemeVerse Community Manager" loading="lazy">
-                        <h3>Taylor</h3>
-                        <p>Community Manager. Taylor connects creators and communities to grow the global meme ecosystem.</p>
-                    </div>
-                </div>
-                <div class="apply-form">
-                    <h3>Join Our Team!</h3>
-                    <p>Passionate about memes and blockchain? Apply to join MemeVerse and help shape the future of digital culture!</p>
-                    <form id="applyForm" onsubmit="handleApply(event)">
-                        <input type="email" placeholder="Enter your email" aria-label="Email for application" required>
-                        <button type="submit" aria-label="Submit Application">Apply Now</button>
-                    </form>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer aria-label="Footer">
-        <p>© 2025 MemeVerse. All rights reserved.</p>
-        <a href="https://x.com/goodprogram" target="_blank" rel="noopener" class="twitter-icon" aria-label="Follow MemeVerse on X">
-            <svg viewBox="0 0 24 24">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-            </svg>
-        </a>
-    </footer>
-
-    <script>
-        const projects = [
-            { abbr: "NLNS", name: "Not Lug Not Spam", desc: "Meme Checker", progress: 80 },
-            { abbr: "SMTW", name: "Show Me The Way", desc: "Meme Generator", progress: 65 },
-            { abbr: "WAYG", name: "Where Are You Going", desc: "Meme Investment Statistics", progress: 45 },
-            { abbr: "WDYW", name: "What Do You Want", desc: "Meme Marketing Agent", progress: 90 },
-            { abbr: "HFHWC", name: "How Far Have We Come", desc: "Meme Influence Checker", progress: 30 },
-            { abbr: "EIMM", name: "Everything Is My Mind", desc: "Meme Health Checker", progress: 75 },
-            { abbr: "WDYG", name: "What Did You Get", desc: "Meme Life Cycle", progress: 50 },
-            { abbr: "WHTGT", name: "We Have To Go Together", desc: "Meme Market Checker", progress: 85 },
-            { abbr: "HOHM", name: "Helping Others Helps Me", desc: "Meme Donation System", progress: 20 },
-            { abbr: "WATW", name: "We Are The World", desc: "Meme Culture Analyzer", progress: 95 }
-        ];
-
-        const pages = {
-            home: {
-                meta: {
-                    description: "MemeVerse: Explore innovative blockchain-based meme projects revolutionizing digital culture in Africa and Asia.",
-                    keywords: "MemeVerse, meme, blockchain, digital culture, Solana, crypto, Africa, Asia",
-                    title: "MemeVerse - Revolutionizing Meme Ecosystem",
-                    schema: {
-                        "@context": "https://schema.org",
-                        "@type": "WebPage",
-                        "name": "MemeVerse Projects",
-                        "description": "MemeVerse offers innovative blockchain-based meme projects to revolutionize digital culture.",
-                        "url": "https://yourdomain.com",
-                        "publisher": {
-                            "@type": "Organization",
-                            "name": "MemeVerse",
-                            "logo": { "@type": "ImageObject", "url": "https://source.unsplash.com/200/200?meme" }
-                        }
-                    }
-                }
-            },
-            system: {
-                meta: {
-                    description: "Learn how MemeVerse's Meme Management System empowers users to create, share, and monetize memes on Solana blockchain.",
-                    keywords: "MemeVerse, meme management, Solana, blockchain, meme creation, NFT",
-                    title: "MemeVerse System - Meme Management Platform",
-                    schema: {
-                        "@context": "https://schema.org",
-                        "@type": "WebPage",
-                        "name": "MemeVerse System",
-                        "description": "MemeVerse's Meme Management System empowers users to create, share, and monetize memes on Solana blockchain.",
-                        "url": "https://yourdomain.com/system",
-                        "publisher": {
-                            "@type": "Organization",
-                            "name": "MemeVerse",
-                            "logo": { "@type": "ImageObject", "url": "https://source.unsplash.com/200/200?meme" }
-                        }
-                    }
-                }
-            },
-            culture: {
-                meta: {
-                    description: "Discover five ways MemeVerse advances meme culture through inclusivity, creator support, and blockchain innovation.",
-                    keywords: "MemeVerse, meme culture, digital culture, blockchain, NFT, community",
-                    title: "MemeVerse Culture - Advancing Meme Culture",
-                    schema: {
-                        "@context": "https://schema.org",
-                        "@type": "WebPage",
-                        "name": "MemeVerse Culture",
-                        "description": "MemeVerse advances meme culture through inclusivity, creator support, and blockchain innovation.",
-                        "url": "https://yourdomain.com/culture",
-                        "publisher": {
-                            "@type": "Organization",
-                            "name": "MemeVerse",
-                            "logo": { "@type": "ImageObject", "url": "https://source.unsplash.com/200/200?meme" }
-                        }
-                    }
-                }
-            },
-            team: {
-                meta: {
-                    description: "Meet the MemeVerse team and apply to join our mission to revolutionize meme culture with blockchain technology.",
-                    keywords: "MemeVerse, team, blockchain, meme culture, careers, Solana",
-                    title: "MemeVerse Team - Join Our Mission",
-                    schema: {
-                        "@context": "https://schema.org",
-                        "@type": "WebPage",
-                        "name": "MemeVerse Team",
-                        "description": "Meet the MemeVerse team and apply to join our mission to revolutionize meme culture.",
-                        "url": "https://yourdomain.com/team",
-                        "publisher": {
-                            "@type": "Organization",
-                            "name": "MemeVerse",
-                            "logo": { "@type": "ImageObject", "url": "https://source.unsplash.com/200/200?meme" }
-                        }
-                    }
-                }
-            }
-        };
-
-        function renderProjects() {
-            const projectGrid = document.getElementById("project-grid");
-            projectGrid.innerHTML = "";
-            projects.forEach(project => {
-                const card = document.createElement("article");
-                card.className = "project-card";
-                const randomImage = `https://source.unsplash.com/200/200?meme&sig=${Math.floor(Math.random() * 1000)}`;
-                const linkTitle = project.name.replace(/\s+/g, '-').toLowerCase();
-                const projectLink = `https://softkid.github.io/RayMeme-www/${linkTitle}`;
-                card.innerHTML = `
-                    <div class="project-image">
-                        <img src="${randomImage}" alt="Meme image for ${project.name} project" loading="lazy">
-                    </div>
-                    <div class="project-content">
-                        <h2>${project.abbr}</h2>
-                        <p><a href="${projectLink}" target="_blank" rel="noopener"><span>${project.name}</span></a></p>
-                        <p>${project.desc}</p>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: ${project.progress}%"></div>
-                        </div>
-                        <p>Progress: ${project.progress}%</p>
-                    </div>
-                `;
-                projectGrid.appendChild(card);
-            });
-        }
-
-        function updateMeta(page) {
-            const meta = pages[page].meta;
-            document.querySelector('meta[name="description"]').setAttribute("content", meta.description);
-            document.querySelector('meta[name="keywords"]').setAttribute("content", meta.keywords);
-            document.querySelector('meta[property="og:title"]').setAttribute("content", meta.title);
-            document.querySelector('meta[property="og:description"]').setAttribute("content", meta.description);
-            document.querySelector('meta[property="og:url"]').setAttribute("content", meta.schema.url);
-            document.querySelector('meta[name="twitter:title"]').setAttribute("content", meta.title);
-            document.querySelector('meta[name="twitter:description"]').setAttribute("content", meta.description);
-            document.title = meta.title;
-            document.getElementById("schema-script").textContent = JSON.stringify(meta.schema);
-        }
-
-        function showPage(page) {
-            document.querySelectorAll("section").forEach(section => {
-                section.classList.remove("active");
-            });
-            document.getElementById(page).classList.add("active");
-            document.querySelectorAll(".nav-menu a").forEach(link => {
-                link.classList.remove("active");
-                if (link.getAttribute("data-page") === page) {
-                    link.classList.add("active");
-                }
-            });
-            updateMeta(page);
-            if (page === "home") {
-                renderProjects();
-            }
-        }
-
-        function handleNavigation() {
-            const path = window.location.pathname.replace(/^\/+/, '') || "home";
-            const page = path === "" ? "home" : path;
-            showPage(page in pages ? page : "home");
-            history.pushState({ page }, "", `/${page === "home" ? "" : page}`);
-        }
-
-        function copyAddress() {
-            const address = "7f441uouCnNhQCgNfZ5FU2Baj1VLaqFBLDNgoT7sd3w";
-            const modal = document.getElementById("copyModal");
-            navigator.clipboard.writeText(address).then(() => {
-                modal.classList.add("show");
-                setTimeout(() => {
-                    modal.classList.remove("show");
-                }, 1000);
-            }).catch(err => {
-                console.error("Failed to copy: ", err);
-                modal.textContent = "Failed to copy address.";
-                modal.classList.add("show");
-                setTimeout(() => {
-                    modal.classList.remove("show");
-                }, 1000);
-            });
-        }
-
-        function toggleMenu() {
-            const navMenu = document.getElementById("navMenu");
-            navMenu.classList.toggle("active");
-        }
-
-        function handleApply(event) {
-            event.preventDefault();
-            alert("Thank you for applying! We'll contact you soon.");
-            event.target.reset();
-        }
-
-        // 초기 렌더링 및 이벤트 리스너
-        document.addEventListener("DOMContentLoaded", () => {
-            handleNavigation();
-            document.querySelectorAll(".nav-menu a").forEach(link => {
-                link.addEventListener("click", (e) => {
-                    e.preventDefault();
-                    const page = link.getAttribute("data-page");
-                    showPage(page);
-                    history.pushState({ page }, "", `/${page === "home" ? "" : page}`);
-                    toggleMenu();
-                });
-            });
-        });
-
-        window.addEventListener("popstate", handleNavigation);
-    </script>
+    <div class="footer">
+      <p>CoffeeCoin isn’t just a memecoin. It’s an <strong>energy-fueled movement</strong>.</p>
+      <p>Brew your portfolio. Sip the gains. Repeat.</p>
+      <div class="sparkle">✨</div>
+    </div>
+  </div>
 </body>
 </html>
